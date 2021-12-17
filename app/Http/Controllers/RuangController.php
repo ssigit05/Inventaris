@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Jenis;
 use Illuminate\Http\Request;
+use App\Models\Ruang;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class JenisController extends Controller
+class RuangController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,14 +16,13 @@ class JenisController extends Controller
     public function index(Request $request)
     {
         $search = $request->search;
-        $data = Jenis::select('id','nama','kode','keterangan')
+        $data = Ruang::select('id','kode','nama','keterangan')
         ->when($search, function($query, $search){
             return $query->where('nama','like',"%{$search}%");
         })
         ->orderBy('nama')
         ->paginate(25);
-
-        return view('jenis.index',['data'=>$data]);
+        return view('ruang.index',['data'=>$data]);
     }
 
     /**
@@ -33,7 +32,7 @@ class JenisController extends Controller
      */
     public function create()
     {
-        return view('jenis.create');
+        return view('ruang.create');
     }
 
     /**
@@ -45,18 +44,19 @@ class JenisController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kode'=>'required|max:100|unique:jenis',
-            'nama_jenis'=>'required|between:3,100',
-            'keterangan'=>'nullable|max:250',
+            'kode'=>'required|max:100|alpha_dash|unique:ruangs',
+            'nama_ruang'=>'required|max:100',
+            'keterangan'=>'nullable|min:8',
         ]);
-        Jenis::create([
+
+        Ruang::create([
             'kode'=>strtoupper($request->kode),
-            'nama'=>$request->nama_jenis,
+            'nama'=>$request->nama_ruang,
             'keterangan'=>$request->keterangan,
         ]);
 
         Alert::success('Berhasil', 'Data Berhasil Di Simpan');
-        return redirect()->route('jenis.create');
+        return redirect()->route('ruang.create');
     }
 
     /**
@@ -76,9 +76,9 @@ class JenisController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit( Jenis $jeni)
+    public function edit( Ruang $ruang)
     {
-        return view('jenis.edit',['data'=>$jeni]);
+        return view('ruang.edit',['data'=>$ruang]);
     }
 
     /**
@@ -88,23 +88,21 @@ class JenisController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Jenis $jeni)
+    public function update(Request $request, Ruang $ruang)
     {
         $request->validate([
-            'kode'=>'required|max:100|unique:jenis,kode,'.$jeni->id,
-            'nama_jenis'=>'required|between:3,100',
-            'keterangan'=>'nullable|max:250',
+            'kode'=>'required|max:100|alpha_dash|unique:ruangs,kode,'.$ruang->id,
+            'nama_ruang'=>'required|max:100',
+            'keterangan'=>'nullable|min:8',
         ]);
-
-        $jeni->update([
-            'kode'=>$request->kode,
-            'nama'=>$request->nama_jenis,
+        $ruang->update([
+            'kode'=>strtoupper($request->kode),
+            'nama'=>$request->nama_ruang,
             'keterangan'=>$request->keterangan,
         ]);
 
         toast('Berhasil Di Edit', 'success');
-        return redirect()->route('jenis.index');
-
+        return redirect()->route('ruang.index');
     }
 
     /**
@@ -113,9 +111,9 @@ class JenisController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy( Jenis $jeni)
+    public function destroy( Ruang $ruang)
     {
-        $jeni->delete();
+        $ruang->delete();
 
         toast('Berhasil Di Hapus', 'success');
         return back();

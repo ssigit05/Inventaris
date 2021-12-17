@@ -41,6 +41,7 @@
 
 @stack('modal')
 @include('layouts.inc.ext-js')
+@include('sweetalert::alert')
 @stack('js')
 </body>
 </html>

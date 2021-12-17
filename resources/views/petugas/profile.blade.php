@@ -2,7 +2,7 @@
 
 @section('content-header')
 <div class="container-fluid mb-2">
-    <h1> <i class="fas fa-user"></i>Profile User</h1>
+    <h1> <i class="fas fa-user"></i> Profile Petugas</h1>
 </div><!-- /.container-fluid -->
 @endsection
 

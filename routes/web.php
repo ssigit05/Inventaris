@@ -34,6 +34,7 @@ function () {
             Route::resource('petugas','PetugasController');
             Route::resource('pegawai','PegawaiController');
             Route::resource('jenis','JenisController');
+            Route::resource('ruang','RuangController');
         });
         
     });

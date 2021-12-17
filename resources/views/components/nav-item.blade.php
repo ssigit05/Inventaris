@@ -1,4 +1,4 @@
-@props(['link'=>'#','label'=>'','icon'=>''])
+@props(['link'=>'#','label'=>'','icon'=>'','img'=>''])
 <?php
 $path = trim(str_replace( url('/'),'',$link),'/');
 $wildchar = $path != config('invensa.prefix') ? '*' : '';

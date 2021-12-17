@@ -36,6 +36,8 @@ class PetugasProfileController extends Controller
         }
 
         $data->forceFill($query)->save();
-        return back()->with('success','update');
+        
+        toast('Data Berhasil Di Edit','success');
+        return back();
     }
 }

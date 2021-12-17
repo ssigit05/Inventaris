@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Petugas;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PetugasController extends Controller
 {
@@ -56,7 +57,8 @@ class PetugasController extends Controller
         $class->password = bcrypt($request->password);
         $class-> save();
         
-        return redirect()->route('petugas.index')->with('success','store');
+        Alert::success('Berhasil', 'Data Berhasil Di Simpan');
+        return redirect()->route('petugas.create');
     }
 
     /**
@@ -110,7 +112,9 @@ class PetugasController extends Controller
         }
 
         $petuga->forceFill($query)->save();
-        return redirect()->route('petugas.index')->with('success','update');
+        
+        toast('Berhasil Di Edit', 'success');
+        return redirect()->route('petugas.index');
     }
 
     /**
@@ -122,6 +126,8 @@ class PetugasController extends Controller
     public function destroy(Petugas $petuga)
     {
         $petuga->delete();
-        return redirect()->route('petugas.index')->with('success','destroy');
+
+        toast('Berhasil Di Hapus', 'success');
+        return redirect()->route('petugas.index');
     }
 }

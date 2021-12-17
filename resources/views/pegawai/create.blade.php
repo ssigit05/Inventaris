@@ -5,6 +5,7 @@
     </div>
 @endsection
 @section('content')
+{{-- <x-notif/> --}}
     <form method="post" action="{{ route('pegawai.store')}}"class="card card-primary">
         <div class="card-header">
             <h3 class="card-title">+ Tambah</h3>
@@ -24,7 +25,12 @@
                 </div>
             </div>
             <div class="card-footer text-right">
-                <x-btn-simpan/>
+                <div class="row">
+                    <div class="col">
+                        <x-btn-back :link="route('pegawai.index')"/>
+                        <x-btn-simpan/>
+                    </div>
+                </div>
             </div>
         </div>
     </form>

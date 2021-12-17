@@ -7,6 +7,7 @@
 @endsection
 
 @section('content')
+{{-- <x-notif/> --}}
 <div class="row d-flex justify-content-center">
     <div class="col-4">
         <form class="card card-primary" action="{{ route('petugas.store')}}" method="post">
@@ -20,7 +21,12 @@
                <x-input label="Password Confirmation" name="password_confirmation" placeholder="Password Confirmation" type="password"/>
             </div>
             <div class="card-footer text-right">
-                <x-btn-simpan/>
+                <div class="row">
+                    <div class="col">
+                        <x-btn-back :link="route('petugas.index')"/>
+                        <x-btn-simpan/>
+                    </div>
+                </div>
             </div>
         </form>
     </div>

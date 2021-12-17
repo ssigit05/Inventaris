@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pegawai;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PegawaiController extends Controller
 {
@@ -60,7 +61,9 @@ class PegawaiController extends Controller
         $class->password = bcrypt($request->password);
         $class-> save();
         
-        return redirect()->route('pegawai.index')->with('success','store');
+
+        Alert::success('Berhasil', 'Data Berhasil Di Simpan');
+        return redirect()->route('pegawai.create');
     }
 
     /**
@@ -121,7 +124,9 @@ class PegawaiController extends Controller
         }
 
         $pegawai->forceFill($query)->save();
-        return redirect()->route('pegawai.index')->with('success','update');
+
+        toast('Berhasil Di Edit', 'success');
+        return redirect()->route('pegawai.index');
     }
 
     /**
@@ -133,6 +138,8 @@ class PegawaiController extends Controller
     public function destroy(Pegawai $pegawai)
     {
         $pegawai->delete();
-        return back()->with('success','destroy');
+
+        toast('Berhasil Di Hapus', 'success');
+        return back();
     }
 }

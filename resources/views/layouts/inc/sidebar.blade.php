@@ -40,7 +40,7 @@
               <x-nav-item label="Petugas" icon="fas fa-user-friends" :link="route('petugas.index')"/>
               <x-nav-item label="Pegawai" icon="fas fa-users" :link="route('pegawai.index')"/>
               <x-nav-item label="Jenis" icon="fas fa-object-group" :link="route('jenis.index')"/>
-              <x-nav-item label="Ruangan" icon="fas fa-archive" link="#"/>
+              <x-nav-item label="Ruangan" icon="fas fa-archive" :link="route('ruang.index')"/>
               <x-nav-item label="Inventaris" icon="fas fa-desktop" link="#"/>
               <x-nav-item label="Peminjaman" icon="fas fa-hand-holding" link="#"/>
               <x-nav-item label="Pengembalian" icon="fas fa-recycle" link="#"/>
